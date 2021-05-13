@@ -1,0 +1,3 @@
+<Response>
+    <Redirect method="POST">http://{{tufileserver}}/InboundXML/option{{Digits}}.xml?tufileserver={{tufileserver}}</Redirect>
+</Response>
