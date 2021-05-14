@@ -5,10 +5,21 @@
  */
 package service.cpaas.workshop.cauca.actions;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.json.JSONObject;
 import service.cpaas.workshop.cauca.http.APICPaaSWorkShop;
+import service.cpaas.workshop.cauca.log.EscribirEnLog;
 import service.cpaas.workshop.cauca.models.GatherStatusModel;
 import service.cpaas.workshop.cauca.util.Constants_Attributes;
 
@@ -88,11 +99,84 @@ public class InboundXMLWithBackEndActions {
     }
     
     public void opcion1_4(String speech) throws IOException { 
-        response.getWriter().println("<Response>\n"
-                            + "    <Say voice=\"woman\" language=\"es\">Recibido, direccion "+speech+", enviaremos un vehículo, gracias por usar nuestros servicios</Say>\n"
-                            + "     <Hangup/>\n"
-                            + "</Response>\n"
-                            + "");
+        this.createOrder(speech);
+    }
+
+    private void createOrder(String speech) throws IOException {
+        try {
+            final String URI = "http://api.taxisrcp.co/api/taxisrcp-core/auth/login";
+            final CloseableHttpClient client = HttpClients.createDefault();
+            final HttpPost postMethod = new HttpPost(URI);
+            postMethod.setHeader("Content-Type", "application/json");
+
+            //final String authString = "apikey" + ":" + Constants_Attributes.IBM_TRADUCTOR_API_KEY;
+            //final String authEncBytes = DatatypeConverter.printBase64Binary(authString.getBytes());
+            //postMethod.addHeader("Authorization", "Basic " + authEncBytes);
+            JSONObject payLoad = new JSONObject();
+            payLoad.put("phone", "3145324545");
+            payLoad.put("password", "admin123");
+            StringEntity entity = new StringEntity(payLoad.toString(), StandardCharsets.UTF_8);
+            postMethod.setEntity(entity);
+            final CloseableHttpResponse response = client.execute(postMethod);
+            final BufferedReader inputStream = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), StandardCharsets.UTF_8));
+            String line = "";
+            final StringBuilder result = new StringBuilder();
+            while ((line = inputStream.readLine()) != null) {
+                result.append(line);
+            }
+            JSONObject resposneJson = new JSONObject(result.toString());
+            System.out.println("Su token es: ");
+            String token = "Bearer " + new JSONObject(resposneJson.get("data").toString()).get("token").toString();
+            System.out.println(token);
+
+            final String URI_CREATE_ORDER = "http://api.taxisrcp.co/api/taxisrcp-core/orders";
+            final CloseableHttpClient client_order = HttpClients.createDefault();
+            final HttpPost postMethod_order = new HttpPost(URI_CREATE_ORDER);
+            postMethod_order.setHeader("Content-Type", "application/json");
+
+            postMethod_order.addHeader("Authorization", token);
+
+            payLoad = new JSONObject();
+            JSONObject whereTo = new JSONObject();
+            JSONObject whereToLocation = new JSONObject();
+            JSONObject whereFrom = new JSONObject();
+            JSONObject whereFromLocation = new JSONObject();
+
+            whereToLocation.put("lat", "1");
+            whereToLocation.put("lng", "1");
+
+            whereTo.put("neighborhood", "Centro");
+            whereTo.put("address", "address");
+            whereTo.put("location", whereToLocation);
+
+            whereFromLocation.put("lat", "1");
+            whereFromLocation.put("lng", "1");
+
+            whereFrom.put("neighborhood", "Centro");
+            whereFrom.put("address", "address");
+            whereFrom.put("location", whereFromLocation);
+
+            payLoad.put("whereTo", whereTo);
+            payLoad.put("whereFrom", whereFrom);
+            entity = new StringEntity(payLoad.toString(), StandardCharsets.UTF_8);
+            postMethod_order.setEntity(entity);
+            final CloseableHttpResponse responseOrder = client_order.execute(postMethod_order);
+            final BufferedReader inputStreamOrder = new BufferedReader(new InputStreamReader(responseOrder.getEntity().getContent(), StandardCharsets.UTF_8));
+            line = "";
+            final StringBuilder resultOrder = new StringBuilder();
+            while ((line = inputStreamOrder.readLine()) != null) {
+                resultOrder.append(line);
+            }
+
+            JSONObject resposneJsonOrder = new JSONObject(resultOrder.toString());
+            System.out.println("order:");
+            System.out.println(resposneJsonOrder.toString());
+
+
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
+        
     }
 
     public void getNumeroDeCuentaValidacion(GatherStatusModel gatherStatus) throws IOException {
