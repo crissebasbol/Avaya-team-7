@@ -53,7 +53,23 @@ public class InboundXMLWithBackEnd extends HttpServlet {
                     String speechResultUtf8 = new String(bytes, StandardCharsets.UTF_8);
                     new EscribirEnLog().crearLog("Spech1: "+request.getParameter("spech1"), request.getServletContext().getRealPath(""));
                     new EscribirEnLog().crearLog("Spech2: "+speechResultUtf8, request.getServletContext().getRealPath(""));
-                    new InboundXMLWithBackEndActions(response).opcion1_2(speechResultUtf8);
+                    new InboundXMLWithBackEndActions(response).opcion1_2(request.getParameter("spech1")+"_"+speechResultUtf8);
+                } else if (request.getParameter("nivel").equals("opcion_1_3")) {
+                    new EscribirEnLog().crearLog("opcion_1_3", request.getServletContext().getRealPath(""));
+                    GatherStatusModel gatherStatusModel = new GatherStatusModel(request);
+                    byte[] bytes = gatherStatusModel.getSpeechResult().getBytes(StandardCharsets.ISO_8859_1);
+                    String speechResultUtf8 = new String(bytes, StandardCharsets.UTF_8);
+                    new EscribirEnLog().crearLog("Spech1: "+request.getParameter("spech1"), request.getServletContext().getRealPath(""));
+                    new EscribirEnLog().crearLog("Spech2: "+speechResultUtf8, request.getServletContext().getRealPath(""));
+                    new InboundXMLWithBackEndActions(response).opcion1_3(request.getParameter("spech1")+"_"+speechResultUtf8);
+                } else if (request.getParameter("nivel").equals("opcion_1_4")) {
+                    new EscribirEnLog().crearLog("opcion_1_4", request.getServletContext().getRealPath(""));
+                    GatherStatusModel gatherStatusModel = new GatherStatusModel(request);
+                    byte[] bytes = gatherStatusModel.getSpeechResult().getBytes(StandardCharsets.ISO_8859_1);
+                    String speechResultUtf8 = new String(bytes, StandardCharsets.UTF_8);
+                    new EscribirEnLog().crearLog("Spech1: "+request.getParameter("spech1"), request.getServletContext().getRealPath(""));
+                    new EscribirEnLog().crearLog("Spech2: "+speechResultUtf8, request.getServletContext().getRealPath(""));
+                    new InboundXMLWithBackEndActions(response).opcion1_4(request.getParameter("spech1")+"_"+speechResultUtf8);
                 } 
             }
         } catch (Exception e) {

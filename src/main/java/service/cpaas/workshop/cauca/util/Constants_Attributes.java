@@ -21,6 +21,8 @@ public class Constants_Attributes {
     public final static String IVR_WITH_BACKEND_BIENVENIDA = System.getenv("IVR_WITH_BACKEND_BIENVENIDA");
     public final static String NEIGH_ORIGIN = System.getenv("NEIGH_ORIGIN");
     public final static String ADRESS_ORIGIN = System.getenv("ADRESS_ORIGIN");
+    public final static String NEIGH_DEST = System.getenv("NEIGH_DEST");
+    public final static String ADRESS_DEST = System.getenv("ADRESS_DEST");
 
 
     public final static String IVR_WITH_BACKEND_HANGUP = System.getenv("IVR_WITH_BACKEND_HANGUP");
