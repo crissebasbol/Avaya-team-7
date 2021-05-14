@@ -20,6 +20,7 @@ public class Constants_Attributes {
     //EJEMPLO INBOUND XML CON BACKEND
     public final static String IVR_WITH_BACKEND_BIENVENIDA = System.getenv("IVR_WITH_BACKEND_BIENVENIDA");
     public final static String NEIGH_ORIGIN = System.getenv("NEIGH_ORIGIN");
+    public final static String ADRESS_ORIGIN = System.getenv("ADRESS_ORIGIN");
 
 
     public final static String IVR_WITH_BACKEND_HANGUP = System.getenv("IVR_WITH_BACKEND_HANGUP");

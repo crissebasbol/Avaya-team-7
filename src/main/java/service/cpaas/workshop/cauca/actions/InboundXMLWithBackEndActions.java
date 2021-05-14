@@ -68,7 +68,14 @@ public class InboundXMLWithBackEndActions {
 
     public void opcion1_1(String speechResultUtf8) throws IOException { 
         response.getWriter().println("<Response>\n"
-                            + "    <Say voice=\"woman\" language=\"es\">Recibido, barrio "+speechResultUtf8+" adios</Say>\n"
+                            + "    <Redirect method=\"POST\">" + Constants_Attributes.ADRESS_ORIGIN + "?spech1=" + speechResultUtf8 + "</Redirect>\n"
+                            + "</Response>\n"
+                            + "");
+    }
+
+    public void opcion1_2(String speechResultUtf8) throws IOException { 
+        response.getWriter().println("<Response>\n"
+                            + "    <Say voice=\"woman\" language=\"es\">Recibido, direccion "+speechResultUtf8+" adios</Say>\n"
                             + "</Response>\n"
                             + "");
     }
