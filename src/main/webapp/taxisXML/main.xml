@@ -1,7 +1,7 @@
 <Response>
   <Pause length="3"></Pause>
   <Say voice="female" language="es">Hola bienvenido a Taxis R C P, Por favor seleccione una de las siguientes opciones.</Say>
-  <Gather method="POST" numDigits="1" finishOnKey="0" action="https://{{tufileserver}}/taxisXML/BaseRedirect.xml?tufileserver={{tufileserver}}"> 
+  <Gather method="POST" numDigits="1" finishOnKey="0" action="http://{{tufileserver}}/taxisXML/BaseRedirect.xml?tufileserver={{tufileserver}}"> 
     <Say voice="female" language="es">Presiona uno para solicitar un taxi.</Say>
     <Say voice="female" language="es">Presiona dos para hablar con uno de nuestros operadores.</Say>
     <Say voice="female" language="es">Presiona tres para hablar con un administrador a cargo.</Say>

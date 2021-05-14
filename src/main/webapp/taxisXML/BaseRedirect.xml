@@ -1,3 +1,4 @@
 <Response>
+    <Say voice="female" language="es">Redireccionando</Say>
     <Redirect method="POST">http://{{tufileserver}}/taxisXML/option{{Digits}}.xml?tufileserver={{tufileserver}}</Redirect>
 </Response>
