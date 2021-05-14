@@ -1,0 +1,7 @@
+<Response>
+    <!-- Opcion 1, Enviar SMS -->
+    <Say voice="female" language="es">Para solicitar un taxi responde las siguientes preguntas, para terminar marca #</Say>
+    <Gather method="POST" input="speech" finishOnKey="#" action="https://demo7015781.mockable.io/taxis-gather">
+      <Say voice="female" language="es">Desde que barrio te comunicas</Say>
+    </Gather>
+</Response>
