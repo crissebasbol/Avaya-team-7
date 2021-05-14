@@ -51,7 +51,7 @@ public class InboundXMLWithBackEndActions {
                     break;
                 case "3":
                     response.getWriter().println("<Response>\n"
-                            + "     <Hangup/>\n"
+                            + "    <Say voice=\"woman\" language=\"es\">Opcion 3 seleccionada</Say>\n"
                             + "</Response>\n"
                             + "");
                     break;
