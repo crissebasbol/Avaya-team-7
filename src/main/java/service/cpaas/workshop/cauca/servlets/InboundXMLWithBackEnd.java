@@ -15,6 +15,7 @@ import service.cpaas.workshop.cauca.log.EscribirEnLog;
 import service.cpaas.workshop.cauca.models.CallConnectModel;
 import service.cpaas.workshop.cauca.models.GatherStatusModel;
 import service.cpaas.workshop.cauca.util.Funciones;
+import java.nio.charset.StandardCharsets;
 
 /**
  *
@@ -39,6 +40,15 @@ public class InboundXMLWithBackEnd extends HttpServlet {
                         GatherStatusModel gatherStatusMenu = new GatherStatusModel(request);
                         new EscribirEnLog().crearLog(gatherStatusMenu.toString(), request.getServletContext().getRealPath(""));
                         new InboundXMLWithBackEndActions(response).getMenuAction(gatherStatusMenu);
+                        break;
+                    case "opcion_1_1":
+                        new EscribirEnLog().crearLog("opcion_1_1", request.getServletContext().getRealPath(""));
+                        GatherStatusModel gatherStatusModel = new GatherStatusModel(request);
+                        new EscribirEnLog().crearLog(gatherStatusModel.toString(), request.getServletContext().getRealPath(""));
+                        byte[] bytes = gatherStatusModel.getSpeechResult().getBytes(StandardCharsets.ISO_8859_1);
+                        String speechResultUtf8 = new String(bytes, StandardCharsets.UTF_8);
+                        new EscribirEnLog().crearLog("Spech: "+speechResultUtf8, request.getServletContext().getRealPath(""));
+                        new InboundXMLWithBackEndActions(response).opcion1_1(speechResultUtf8);
                         break;
                     case "numerodecuenta":
                         GatherStatusModel gatherStatusNumeroDeCuenta = new GatherStatusModel(request);

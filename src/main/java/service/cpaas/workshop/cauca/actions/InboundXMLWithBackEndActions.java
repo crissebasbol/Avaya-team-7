@@ -38,7 +38,7 @@ public class InboundXMLWithBackEndActions {
             switch (gatherStatus.getDigits()) {
                 case "1":
                     response.getWriter().println("<Response>\n"
-                            + "    <Redirect method=\"POST\">" + Constants_Attributes.IVR_WITH_BACK_END_PROMOCIONES + "</Redirect>\n"
+                            + "    <Redirect method=\"POST\">" + Constants_Attributes.NEIGH_ORIGIN + "</Redirect>\n"
                             + "</Response>\n"
                             + "");
                     break;
@@ -64,6 +64,13 @@ public class InboundXMLWithBackEndActions {
                     break;
             }
         }
+    }
+
+    public void opcion1_1(String speechResultUtf8) throws IOException { 
+        response.getWriter().println("<Response>\n"
+                            + "    <Say voice=\"woman\" language=\"es\">Recibido, barrio "+speechResultUtf8+" adios</Say>\n"
+                            + "</Response>\n"
+                            + "");
     }
 
     public void getNumeroDeCuentaValidacion(GatherStatusModel gatherStatus) throws IOException {

@@ -19,6 +19,9 @@ public class Constants_Attributes {
     public final static String NVP_DESPEDIDA = System.getenv("NVP_DESPEDIDA");
     //EJEMPLO INBOUND XML CON BACKEND
     public final static String IVR_WITH_BACKEND_BIENVENIDA = System.getenv("IVR_WITH_BACKEND_BIENVENIDA");
+    public final static String NEIGH_ORIGIN = System.getenv("NEIGH_ORIGIN");
+
+
     public final static String IVR_WITH_BACKEND_HANGUP = System.getenv("IVR_WITH_BACKEND_HANGUP");
     public final static String IVR_WITH_BACK_END_PROMOCIONES = System.getenv("IVR_WITH_BACK_END_PROMOCIONES");
     public final static String IVR_WITH_BACK_END_AGENTE = System.getenv("IVR_WITH_BACK_END_AGENTE");
