@@ -1,0 +1,7 @@
+<Response>
+  <Pause length='1'/>
+  <Gather input="speech" language="es-US" timeout="30" action="http://{{tufileserver}}/taxisXML/option1_4.xml?tufileserver={{tufileserver}}&spech1={{spech1}}&spech2={{SpeechResult}}">
+    <Say language="es">A que barrio te diriges</Say>
+    <Play loop='1'>tone_stream://%(500,0,800)</Play>
+  </Gather>
+</Response>

@@ -1,0 +1,8 @@
+<Response>
+  <Pause length='1'/>
+  <Say language="es">Resultado</Say>
+  <Gather input="speech" language="es-US" timeout="30" action="http://demo7015781.mockable.io/gather-callback?&spech1={{spech1}}&spech2={{spech2}}&spech3={{spech3}}&spech4={{SpeechResult}}">
+    <Say language="es">Final</Say>
+    <Play loop='1'>tone_stream://%(500,0,800)</Play>
+  </Gather>
+</Response>

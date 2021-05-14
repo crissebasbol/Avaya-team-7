@@ -1,7 +1,7 @@
 <Response>
   <Pause length='2'/>
   <Say language="es">Para solicitar un taxi responde las siguientes preguntas</Say>
-  <Gather input="speech" language="es-US" timeout="30" action="http://demo7015781.mockable.io/gather-callback">
+  <Gather input="speech" language="es-US" timeout="30" action="http://{{tufileserver}}/taxisXML/option1_2.xml?tufileserver={{tufileserver}}">
     <Say language="es">Desde que barrio te comunicas</Say>
     <Play loop='1'>tone_stream://%(500,0,800)</Play>
   </Gather>
