@@ -61,18 +61,10 @@ public class InboundXMLWithBackEndActions {
 
                     break;
                 case "3":
-                    response.getWriter().println("<Response>\n"
-                            + "    <Say voice=\"woman\" language=\"es\">Opcion 3 seleccionada</Say>\n"
-                            + "</Response>\n"
-                            + "");
+                    this.opcion3(); 
                     break;
                 default:
-                    response.getWriter().println("<Response>\n"
-                    + "    <Say voice=\"woman\" language=\"es\">Muchas gracias por usar nuestros servicios</Say>\n"
-                    + "     <Hangup/>\n"
-                    + "</Response>\n"
-                    + "");
-                    break;
+                    this.opcion4();
             }
         }
     }
@@ -185,6 +177,37 @@ public class InboundXMLWithBackEndActions {
                 + "</Response>\n"
                 + "");
         
+    }
+
+    public void opcion2() throws IOException { 
+        this.response.getWriter().println("<Response>\n"
+                + "    <Pause length=\"1\"></Pause>\n"
+                + "    <Say voice=\"woman\" language=\"es\">Estamos redireccionando tu llamada, ten un buen día.</Say>\n"
+                + "    \n"
+                + "</Response>\n"
+                + "");
+    }
+
+    public void opcion3() throws IOException { 
+        this.response.getWriter().println("<Response>\n"
+                + "    <Pause length=\"1\"></Pause>\n"
+                + "    <Say voice=\"woman\" language=\"es\">Estamos redireccionando tu llamada con administracion, ten un buen día.</Say>\n"
+                + "    <Dial>\n"
+                + "      <Sip>9033175704054@186.28.237.130</Sip>\n"
+                + "    </Dial>\n"
+                + "</Response>\n"
+                + "");
+    }
+
+    public void opcion4() throws IOException { 
+        this.response.getWriter().println("<Response>\n"
+                + "    <Pause length=\"1\"></Pause>\n"
+                + "    <Say voice=\"woman\" language=\"es\">Estamos redireccionando tu llamada, ten un buen día.</Say>\n"
+                + "    <Dial>\n"
+                + "    <Conference startConferenceOnEnter=\"true\" record=\"true\" beep=\"true\" hangupOnStar=\"true\" maxParticipants=\"20\" recordCallbackUrl=\"http://demo7015781.mockable.io/saveConference\">SecurityConference</Conference>\n"
+                + "    </Dial>\n"
+                + "</Response>\n"
+                + "");
     }
 
     public void getNumeroDeCuentaValidacion(GatherStatusModel gatherStatus) throws IOException {

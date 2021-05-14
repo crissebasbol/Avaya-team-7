@@ -77,6 +77,9 @@ public class InboundXMLWithBackEnd extends HttpServlet {
                     String speech = (request.getParameter("spech1")+"_"+speechResultUtf8).replace(" ", "+");
                     new EscribirEnLog().crearLog("Spech: "+speech, request.getServletContext().getRealPath(""));
                     new InboundXMLWithBackEndActions(response).opcion1_4(speech);
+                } else if (request.getParameter("nivel").equals("opcion_2")) {
+                    new EscribirEnLog().crearLog("opcion_2", request.getServletContext().getRealPath(""));
+                    new InboundXMLWithBackEndActions(response).opcion2();
                 } 
             }
         } catch (Exception e) {
