@@ -36,12 +36,6 @@ public class InboundXMLWithBackEndActions {
     public void getMenuAction(GatherStatusModel gatherStatus) throws IOException {
         if (gatherStatus.getDigits().length() != 0) {
             switch (gatherStatus.getDigits()) {
-                case "0":
-                    response.getWriter().println("<Response>\n"
-                            + "    <Redirect method=\"POST\">" + Constants_Attributes.IVR_WITH_BACK_END_AGENTE + "</Redirect>\n"
-                            + "</Response>\n"
-                            + "");
-                    break;
                 case "1":
                     response.getWriter().println("<Response>\n"
                             + "    <Redirect method=\"POST\">" + Constants_Attributes.IVR_WITH_BACK_END_PROMOCIONES + "</Redirect>\n"
@@ -57,15 +51,16 @@ public class InboundXMLWithBackEndActions {
                     break;
                 case "3":
                     response.getWriter().println("<Response>\n"
-                            + "    <Redirect method=\"POST\">" + Constants_Attributes.IVR_WITH_BACKEND_HANGUP + "</Redirect>\n"
+                            + "     <Hangup/>\n"
                             + "</Response>\n"
                             + "");
                     break;
                 default:
                     response.getWriter().println("<Response>\n"
-                            + "    <Redirect method=\"POST\">" + Constants_Attributes.IVR_WITH_BACKEND_BIENVENIDA + "</Redirect>\n"
-                            + "</Response>\n"
-                            + "");
+                    + "    <Say voice=\"woman\" language=\"es\">Muchas gracias por usar nuestros servicios</Say>\n"
+                    + "     <Hangup/>\n"
+                    + "</Response>\n"
+                    + "");
                     break;
             }
         }
