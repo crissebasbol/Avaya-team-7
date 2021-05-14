@@ -26,7 +26,8 @@ public class InboundXMLWithBackEndActions {
 
     public void getBienvenida() throws IOException {
         response.getWriter().println("<Response>\n"
-                + "    <Say voice=\"woman\" language=\"es\">Bienvenido a nuestra primero demo</Say>\n"
+                + "    <Pause length=\"2\"></Pause>\n"
+                + "    <Say voice=\"woman\" language=\"es\">Hola bienvenido a Taxis R C P, Por favor seleccione una de las siguientes opciones.</Say>\n"
                 + "    <Redirect method=\"POST\">" + Constants_Attributes.IVR_WITH_BACKEND_BIENVENIDA + "</Redirect>\n"
                 + "</Response>\n"
                 + "");
