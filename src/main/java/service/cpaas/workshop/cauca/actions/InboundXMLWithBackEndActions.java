@@ -54,11 +54,7 @@ public class InboundXMLWithBackEndActions {
                             + "");
                     break;
                 case "2":
-                    response.getWriter().println("<Response>\n"
-                            + "    <Redirect method=\"POST\">" + Constants_Attributes.IVR_WITH_BACK_END_NUMERO_DE_CUENTA + "</Redirect>\n"
-                            + "</Response>\n"
-                            + "");
-
+                    this.opcion2();
                     break;
                 case "3":
                     this.opcion3(); 
@@ -181,11 +177,8 @@ public class InboundXMLWithBackEndActions {
 
     public void opcion2() throws IOException { 
         this.response.getWriter().println("<Response>\n"
-                + "    <Pause length=\"1\"></Pause>\n"
-                + "    <Say voice=\"woman\" language=\"es\">Estamos redireccionando tu llamada, ten un buen día.</Say>\n"
-                + "    \n"
-                + "</Response>\n"
-                + "");
+            + "<Gather input=\"speech dtmf\" language=\"es-US\" action=\"https://api.zang.io/v2/Accounts/AC777c3e32105058d2149847999a01bff4/Agents/DF9fda65e4fcd440ce888a155dce982f7d/Xml/Hook\" method=\"POST\" finishOnKey=\"*\" timeout=\"10\" hints=\"dialogflow(projectid=newagent-irck;conversationprofileid=78x_iY-BQCmRMHDYGsYXEQ;method=StreamingAnalyzeContent)\"/>\n"
+            + "</Response>");
     }
 
     public void opcion3() throws IOException { 
