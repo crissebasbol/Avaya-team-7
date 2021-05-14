@@ -104,6 +104,8 @@ public class InboundXMLWithBackEndActions {
 
     private void createOrder(String speech) throws IOException {
         try {
+            speech = speech.replace("+", " ");
+            String[] parts = speech.split("_");
             final String URI = "http://api.taxisrcp.co/api/taxisrcp-core/auth/login";
             final CloseableHttpClient client = HttpClients.createDefault();
             final HttpPost postMethod = new HttpPost(URI);
@@ -145,15 +147,15 @@ public class InboundXMLWithBackEndActions {
             whereToLocation.put("lat", "1");
             whereToLocation.put("lng", "1");
 
-            whereTo.put("neighborhood", "Centro");
-            whereTo.put("address", "address");
+            whereTo.put("neighborhood", parts[2]);
+            whereTo.put("address", parts[3]);
             whereTo.put("location", whereToLocation);
 
             whereFromLocation.put("lat", "1");
             whereFromLocation.put("lng", "1");
 
-            whereFrom.put("neighborhood", "Centro");
-            whereFrom.put("address", "address");
+            whereFrom.put("neighborhood", parts[0]);
+            whereFrom.put("address", parts[1]);
             whereFrom.put("location", whereFromLocation);
 
             payLoad.put("whereTo", whereTo);
@@ -176,6 +178,12 @@ public class InboundXMLWithBackEndActions {
         } catch (Exception e) {
             //TODO: handle exception
         }
+        this.response.getWriter().println("<Response>\n"
+                + "    <Pause length=\"2\"></Pause>\n"
+                + "    <Say voice=\"woman\" language=\"es\">Tu orden ha sido creada exitosamente, espera nuestra confirmacion.</Say>\n"
+                + "     <Hangup/>\n"
+                + "</Response>\n"
+                + "");
         
     }
 
