@@ -1,8 +1,8 @@
 <Response>
     <!-- Opcion cero, hablar con un agente -->
-    <Say voice="woman" language="es-us">Su llamada esta siendo transferida y podra ser grabada</Say>
+    <Say voice="woman" language="es">Su llamada esta siendo transferida y podra ser grabada</Say>
     <Record background="true" playBeep="true" finishOnKey="#"/>
     <Dial>
-        <Sip>2867@186.28.237.130</Sip>
+        <Sip>9033175704054@186.28.237.130</Sip>
     </Dial>
 </Response>
