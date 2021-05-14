@@ -28,44 +28,33 @@ public class InboundXMLWithBackEnd extends HttpServlet {
         new Funciones().setAccessControlHeadersXML(response);
         try {
             if (request.getParameter("nivel") != null) {
-                GatherStatusModel gatherStatusModel = new GatherStatusModel(request);
-                byte[] bytes = gatherStatusModel.getSpeechResult().getBytes(StandardCharsets.ISO_8859_1);
-                String speechResultUtf8 = new String(bytes, StandardCharsets.UTF_8);
-                switch (request.getParameter("nivel")) {
-                    case "bienvenida":
-                        new EscribirEnLog().crearLog("BIENVENIDA", request.getServletContext().getRealPath(""));
-                        CallConnectModel callConnect = new CallConnectModel(request);
-                        new EscribirEnLog().crearLog(callConnect.toString(), request.getServletContext().getRealPath(""));
-                        new InboundXMLWithBackEndActions(response).getBienvenida();
-                        break;
-                    case "menu":
-                        new EscribirEnLog().crearLog("MENU", request.getServletContext().getRealPath(""));
-                        GatherStatusModel gatherStatusMenu = new GatherStatusModel(request);
-                        new EscribirEnLog().crearLog(gatherStatusMenu.toString(), request.getServletContext().getRealPath(""));
-                        new InboundXMLWithBackEndActions(response).getMenuAction(gatherStatusMenu);
-                        break;
-                    case "opcion_1_1":
-                        new EscribirEnLog().crearLog("opcion_1_1", request.getServletContext().getRealPath(""));
-                        new EscribirEnLog().crearLog(gatherStatusModel.toString(), request.getServletContext().getRealPath(""));
-                        new EscribirEnLog().crearLog("Spech: "+speechResultUtf8, request.getServletContext().getRealPath(""));
-                        new InboundXMLWithBackEndActions(response).opcion1_1(speechResultUtf8);
-                        break;
-                    case "opcion_1_2":
-                        new EscribirEnLog().crearLog("opcion_1_2", request.getServletContext().getRealPath(""));
-                        new EscribirEnLog().crearLog(gatherStatusModel.toString(), request.getServletContext().getRealPath(""));
-                        new EscribirEnLog().crearLog("Spech: "+speechResultUtf8, request.getServletContext().getRealPath(""));
-                        new InboundXMLWithBackEndActions(response).opcion1_2(speechResultUtf8);
-                        break;
-                    case "numerodecuenta":
-                        GatherStatusModel gatherStatusNumeroDeCuenta = new GatherStatusModel(request);
-                        new EscribirEnLog().crearLog("NUMERO DE CUENTA", request.getServletContext().getRealPath(""));
-                        new EscribirEnLog().crearLog(gatherStatusNumeroDeCuenta.toString(), request.getServletContext().getRealPath(""));
-                        new InboundXMLWithBackEndActions(response).getNumeroDeCuentaValidacion(gatherStatusNumeroDeCuenta);
-                        break;
-                    default:
-                        break;
-
-                }
+                if (request.getParameter("nivel").equals("bienvenida")) {
+                    new EscribirEnLog().crearLog("BIENVENIDA", request.getServletContext().getRealPath(""));
+                    CallConnectModel callConnect = new CallConnectModel(request);
+                    new EscribirEnLog().crearLog(callConnect.toString(), request.getServletContext().getRealPath(""));
+                    new InboundXMLWithBackEndActions(response).getBienvenida();
+                } else if (request.getParameter("nivel").equals("menu")) {
+                    new EscribirEnLog().crearLog("MENU", request.getServletContext().getRealPath(""));
+                    GatherStatusModel gatherStatusMenu = new GatherStatusModel(request);
+                    new EscribirEnLog().crearLog(gatherStatusMenu.toString(), request.getServletContext().getRealPath(""));
+                    new InboundXMLWithBackEndActions(response).getMenuAction(gatherStatusMenu);
+                } else if (request.getParameter("nivel").equals("opcion_1_1")) {
+                    new EscribirEnLog().crearLog("opcion_1_1", request.getServletContext().getRealPath(""));
+                    GatherStatusModel gatherStatusModel = new GatherStatusModel(request);
+                    byte[] bytes = gatherStatusModel.getSpeechResult().getBytes(StandardCharsets.ISO_8859_1);
+                    String speechResultUtf8 = new String(bytes, StandardCharsets.UTF_8);
+                    new EscribirEnLog().crearLog(gatherStatusModel.toString(), request.getServletContext().getRealPath(""));
+                    new EscribirEnLog().crearLog("Spech: "+speechResultUtf8, request.getServletContext().getRealPath(""));
+                    new InboundXMLWithBackEndActions(response).opcion1_1(speechResultUtf8);
+                } else if (request.getParameter("nivel").equals("opcion_1_2")) {
+                    new EscribirEnLog().crearLog("opcion_1_2", request.getServletContext().getRealPath(""));
+                    GatherStatusModel gatherStatusModel = new GatherStatusModel(request);
+                    byte[] bytes = gatherStatusModel.getSpeechResult().getBytes(StandardCharsets.ISO_8859_1);
+                    String speechResultUtf8 = new String(bytes, StandardCharsets.UTF_8);
+                    new EscribirEnLog().crearLog("Spech1: "+request.getParameter("spech1"), request.getServletContext().getRealPath(""));
+                    new EscribirEnLog().crearLog("Spech2: "+speechResultUtf8, request.getServletContext().getRealPath(""));
+                    new InboundXMLWithBackEndActions(response).opcion1_2(speechResultUtf8);
+                } 
             }
         } catch (Exception e) {
             new EscribirEnLog().crearLog("Error: " + e.toString(), request.getServletContext().getRealPath(""));
